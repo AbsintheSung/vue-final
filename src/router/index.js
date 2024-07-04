@@ -1,22 +1,32 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/HomeView.vue')
+    path: "/",
+    name: "HomePage",
+    component: () => import("../views/HomePage/index.vue"),
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/AboutView.vue')
-  }
-]
+    path: "/product",
+    name: "ProductPage",
+    component: () => import("../views/ProductPage/index.vue"),
+  },
+  {
+    path: "/detail",
+    name: "DetailPage",
+    component: () => import("../views/DetailPage/index.vue"),
+  },
+  {
+    path: "/Cart",
+    name: "CartPage",
+    component: () => import("../views/CartPage/index.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  linkActiveClass: 'active',
-  routes
-})
+  linkActiveClass: "active",
+  routes,
+});
 
-export default router
+export default router;
