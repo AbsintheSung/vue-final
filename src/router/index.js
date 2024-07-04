@@ -11,6 +11,11 @@ const routes = [
     name: "ProductPage",
     component: () => import("../views/ProductPage/index.vue"),
   },
+  {
+    path: "/detail",
+    name: "DetailPage",
+    component: () => import("../views/DetailPage/index.vue"),
+  },
 ];
 
 const router = createRouter({
