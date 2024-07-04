@@ -13,7 +13,7 @@ const routes = [
   },
 
   {
-    path: "/detail/:productId",
+    path: "/detail/:productId/:category",
     name: "DetailPage",
     component: () => import("../views/DetailPage/index.vue"),
   },

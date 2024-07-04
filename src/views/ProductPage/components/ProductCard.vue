@@ -220,15 +220,15 @@ const productData = ref({
 <template>
   <div class="col-md-8">
     <div class="row">
-      <div class="col-md-6" v-for="productItem in productData.products" :key="productItem.id">
+      <div class="col-md-6" v-for="(productItem, index) in productData.products" :key="productItem.id">
         <div class="card border-0 mb-4 position-relative position-relative">
-          <img :src="productItem.imageUrl" :alt="productItem.description" />
+          <img :src="productItem.imageUrl" :alt="`圖片${index}`" />
           <a href="#" class="text-dark">
             <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
           </a>
           <div class="card-body p-0">
             <h4 class="mb-0 mt-3">
-              <router-link :to="`/detail/${productItem.id}`">{{ productItem.content }}</router-link>
+              <router-link :to="`/detail/${productItem.id}/${productItem.category}`">{{ productItem.content }}</router-link>
             </h4>
             <p class="card-text mb-0">
               NT${{ productItem.price }}
