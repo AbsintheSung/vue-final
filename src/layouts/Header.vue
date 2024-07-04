@@ -10,7 +10,7 @@
         <div class="navbar-nav">
           <router-link class="nav-item nav-link me-4 active" to="/">Home <span class="sr-only">(current)</span></router-link>
           <router-link class="nav-item nav-link me-4" to="/product">Product</router-link>
-          <router-link class="nav-item nav-link me-4" to="detail">Detail</router-link>
+          <router-link class="nav-item nav-link me-4" to="/detail/all">Detail</router-link>
           <router-link class="nav-item nav-link" to="/cart"><i class="fas fa-shopping-cart"></i></router-link>
         </div>
       </div>

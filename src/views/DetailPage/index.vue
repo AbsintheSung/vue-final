@@ -5,6 +5,9 @@ import Footer from "@/layouts/Footer.vue";
 // import DetailSwiperard from "@/views/DetailPage/components/DetailSwiperCard.vue";
 import ProductSwiper from "@/components/ProductSwiper.vue";
 import DetailProductItem from "@/views/DetailPage/components/DetailProductItem.vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+console.log(route.params.productId);
 </script>
 <template>
   <div class="container">
