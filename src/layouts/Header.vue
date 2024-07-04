@@ -2,16 +2,16 @@
 <template>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="./index.html">Navbar</a>
+      <router-link class="navbar-brand" to="/">Navbar</router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link me-4 active" href="./index.html">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link me-4" href="./product.html">Product</a>
-          <a class="nav-item nav-link me-4" href="./detail.html">Detail</a>
-          <a class="nav-item nav-link" href="./cart.html"><i class="fas fa-shopping-cart"></i></a>
+          <router-link class="nav-item nav-link me-4 active" to="/">Home <span class="sr-only">(current)</span></router-link>
+          <router-link class="nav-item nav-link me-4" to="/product">Product</router-link>
+          <router-link class="nav-item nav-link me-4" to="detail">Detail</router-link>
+          <router-link class="nav-item nav-link" to="/cart"><i class="fas fa-shopping-cart"></i></router-link>
         </div>
       </div>
     </nav>
