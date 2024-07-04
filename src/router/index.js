@@ -6,6 +6,11 @@ const routes = [
     name: "HomePage",
     component: () => import("../views/HomePage/index.vue"),
   },
+  {
+    path: "/product",
+    name: "ProductPage",
+    component: () => import("../views/ProductPage/index.vue"),
+  },
 ];
 
 const router = createRouter({
