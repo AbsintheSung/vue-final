@@ -1,7 +1,7 @@
 <script setup>
 import Header from "@/layouts/Header.vue";
 import Footer from "@/layouts/Footer.vue";
-import CartSwiper from "@/views/CartPage/components/CartSwiper.vue";
+import ProductSwiper from "@/components/ProductSwiper.vue";
 import CartTable from "@/views/CartPage/components/CartTable.vue";
 import CartItem from "@/views/CartPage/components/CartItme.vue";
 </script>
@@ -19,7 +19,7 @@ import CartItem from "@/views/CartPage/components/CartItme.vue";
         </div>
       </div>
       <div class="my-5">
-        <CartSwiper />
+        <ProductSwiper />
       </div>
     </div>
   </div>
