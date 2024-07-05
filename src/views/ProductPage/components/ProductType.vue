@@ -6,7 +6,7 @@
         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne">
           <div class="d-flex justify-content-between align-items-center pe-1">
             <h4 class="mb-0">Lorem ipsum</h4>
-            <i class="fas fa-chevron-down"></i>
+            <FontAwesomeIcon :icon="['fas', 'chevron-down']" />
           </div>
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -25,7 +25,7 @@
         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0" id="headingTwo" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
           <div class="d-flex justify-content-between align-items-center pe-1">
             <h4 class="mb-0">Lorem ipsum</h4>
-            <i class="fas fa-chevron-down"></i>
+            <FontAwesomeIcon :icon="['fas', 'chevron-down']" />
           </div>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -44,7 +44,7 @@
         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0" id="headingThree" data-bs-toggle="collapse" data-bs-target="#collapseThree">
           <div class="d-flex justify-content-between align-items-center pe-1">
             <h4 class="mb-0">Lorem ipsum</h4>
-            <i class="fas fa-chevron-down"></i>
+            <FontAwesomeIcon :icon="['fas', 'chevron-down']" />
           </div>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
