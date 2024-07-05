@@ -124,8 +124,8 @@ import ProductInfo from "@/views/CheckInfoPage/components/ProductInfo.vue";
           </div>
         </div> -->
         <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
-          <a href="./product.html" class="text-dark mt-md-0 mt-3"><i class="fas fa-chevron-left me-2"></i> Lorem ipsum</a>
-          <a href="./checkout-success.html" class="btn btn-dark py-3 px-7">Lorem ipsum</a>
+          <router-link to="/checkout" class="text-dark mt-md-0 mt-3"><i class="fas fa-chevron-left me-2"></i> Lorem ipsum</router-link>
+          <router-link to="/" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link>
         </div>
       </div>
     </div>
