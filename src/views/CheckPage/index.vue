@@ -1,11 +1,12 @@
 <script setup>
-import Header from "@/layouts/Header.vue";
-import CheckHeader from "@/views/CheckPage/components/CheckHeader.vue";
+import ProgressLine from "@/components/ProgressLine.vue";
+import CheckHeader from "@/layouts/CheckHeader.vue";
+import ProductItme from "@/components/ProductItem.vue";
 </script>
 <template>
   <div class="container">
     <CheckHeader>
-      <Header />
+      <ProgressLine />
     </CheckHeader>
 
     <div class="row justify-content-center">
@@ -15,7 +16,8 @@ import CheckHeader from "@/views/CheckPage/components/CheckHeader.vue";
     </div>
     <div class="row flex-row-reverse justify-content-center pb-5">
       <div class="col-md-4">
-        <div class="border p-4 mb-4">
+        <ProductItme />
+        <!-- <div class="border p-4 mb-4">
           <div class="d-flex">
             <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" alt="" class="me-2" style="width: 48px; height: 48px; object-fit: cover" />
             <div class="w-100">
@@ -52,7 +54,7 @@ import CheckHeader from "@/views/CheckPage/components/CheckHeader.vue";
             <p class="mb-0 h4 fw-bold">Total</p>
             <p class="mb-0 h4 fw-bold">NT$24,000</p>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-md-6">
         <form>
