@@ -21,6 +21,11 @@ const routes = [
     name: "CartPage",
     component: () => import("../views/CartPage/index.vue"),
   },
+  {
+    path: "/checkout",
+    name: "CheckPage",
+    component: () => import("../views/CheckPage/index.vue"),
+  },
 ];
 
 const router = createRouter({
