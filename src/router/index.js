@@ -26,6 +26,11 @@ const routes = [
     name: "CheckPage",
     component: () => import("../views/CheckPage/index.vue"),
   },
+  {
+    path: "/checkoutinfo",
+    name: "CheckInfoPage",
+    component: () => import("../views/CheckInfoPage/index.vue"),
+  },
 ];
 
 const router = createRouter({
