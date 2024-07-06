@@ -1,8 +1,8 @@
 <script setup>
 import Header from "@/layouts/Header.vue";
 import Footer from "@/layouts/Footer.vue";
-import ProductCard from "@/views/ProductPage/components/ProductCard.vue";
-import ProductType from "@/views/ProductPage/components/ProductType.vue";
+import ProductCard from "@/views/products/components/ProductCard.vue";
+import ProductType from "@/views/products/components/ProductType.vue";
 </script>
 <template>
   <div class="container">
