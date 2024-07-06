@@ -4,37 +4,37 @@ const routes = [
   {
     path: "/",
     name: "HomePage",
-    component: () => import("../views/HomePage/index.vue"),
+    component: () => import("../views/home/index.vue"),
   },
   {
-    path: "/product",
+    path: "/products",
     name: "ProductPage",
-    component: () => import("../views/ProductPage/index.vue"),
+    component: () => import("../views/products/index.vue"),
   },
   {
     path: "/detail",
     name: "DetailPage",
-    component: () => import("../views/DetailPage/index.vue"),
+    component: () => import("../views/detail/index.vue"),
   },
   {
     path: "/cart",
     name: "CartPage",
-    component: () => import("../views/CartPage/index.vue"),
+    component: () => import("../views/cart/index.vue"),
   },
   {
     path: "/checkout",
     name: "CheckPage",
-    component: () => import("../views/CheckPage/index.vue"),
+    component: () => import("../views/checkout/index.vue"),
   },
   {
     path: "/checkoutinfo",
     name: "CheckInfoPage",
-    component: () => import("../views/CheckInfoPage/index.vue"),
+    component: () => import("../views/checkoutinfo/index.vue"),
   },
   {
     path: "/success",
     name: "SuccessPage",
-    component: () => import("../views/SuccessPage/index.vue"),
+    component: () => import("../views/success/index.vue"),
   },
 ];
 

@@ -1,5 +1,5 @@
 <script setup>
-import ProductPages from "@/views/ProductPage/components/ProductPages.vue";
+import ProductPages from "@/views/products/components/ProductPages.vue";
 
 // console.log(import.meta.env.VITE_APP_API_URL);
 </script>

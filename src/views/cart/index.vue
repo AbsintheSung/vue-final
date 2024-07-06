@@ -2,8 +2,8 @@
 import Header from "@/layouts/Header.vue";
 import Footer from "@/layouts/Footer.vue";
 import ProductSwiper from "@/components/ProductSwiper.vue";
-import CartTable from "@/views/CartPage/components/CartTable.vue";
-import CartItem from "@/views/CartPage/components/CartItme.vue";
+import CartTable from "@/views/cart/components/CartTable.vue";
+import CartItem from "@/views/cart/components/CartItme.vue";
 </script>
 <template>
   <div class="container">

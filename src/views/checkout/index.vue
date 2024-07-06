@@ -78,7 +78,10 @@ import ProductItme from "@/components/ProductItem.vue";
           </div>
         </form>
         <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
-          <router-link to="/product" class="text-dark mt-md-0 mt-3"><FontAwesomeIcon class="me-2" :icon="['fas', 'chevron-left']" />Lorem ipsum</router-link>
+          <router-link to="/products" class="text-dark mt-md-0 mt-3">
+            <FontAwesomeIcon class="me-2" :icon="['fas', 'chevron-left']" />
+            Lorem ipsum
+          </router-link>
           <router-link to="/checkoutinfo" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link>
         </div>
       </div>
