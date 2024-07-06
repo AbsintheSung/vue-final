@@ -1,36 +1,28 @@
 <script setup>
-import { ref } from "vue";
-
-const carouselItems = ref([
-  {
-    title: "Lorem ipsum 1",
-    content: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
-    author: "Lorem ipsum dolor sit amet 1",
+// import { ref } from "vue";
+const props = defineProps({
+  courseData: {
+    type: Array,
+    default: () => {
+      return [];
+    },
   },
-  {
-    title: "Lorem ipsum 2",
-    content: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
-    author: "Lorem ipsum dolor sit amet 2",
-  },
-  {
-    title: "Lorem ipsum 3",
-    content: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
-    author: "Lorem ipsum dolor sit amet 3",
-  },
-]);
+});
 </script>
 <template>
   <div class="bg-light mt-7">
     <div class="container">
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div v-for="(item, index) in carouselItems" :key="index" class="carousel-item" :class="{ active: index === 0 }">
+          <div v-for="(courseItem, index) in props.courseData" :key="courseItem.id" class="carousel-item" :class="{ active: index === 0 }">
             <div class="row justify-content-center py-7">
               <div class="col-md-6 text-center">
-                <h3>{{ item.title }}</h3>
-                <p class="my-5">{{ item.content }}</p>
+                <h3>
+                  <router-link to="detail">{{ courseItem.title }}</router-link>
+                </h3>
+                <p class="my-5">{{ courseItem.description }}</p>
                 <p>
-                  <small>—{{ item.author }}—</small>
+                  <small>—{{ courseItem.content }}—</small>
                 </p>
               </div>
             </div>

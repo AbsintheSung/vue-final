@@ -41,6 +41,10 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   linkActiveClass: "active",
+  // eslint-disable-next-line
+  scrollBehavior() {
+    return { top: 0 }
+  },
   routes,
 });
 
