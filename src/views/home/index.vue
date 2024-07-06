@@ -1,7 +1,7 @@
 <script setup>
 import Header from "@/layouts/Header.vue";
 import HomeHeader from "@/views/home/components/HomeHeader.vue";
-import HomeProductCard from "@/views/home/components/HomeProductCard.vue";
+import HomeInfoCard from "@/views/home/components/HomeInfoCard.vue";
 import HomeCarousel from "@/views/home/components/HomeCarousel.vue";
 import HomeLine from "@/views/home/components/HomeLine.vue";
 import Footer from "@/layouts/Footer.vue";
@@ -11,7 +11,7 @@ import Footer from "@/layouts/Footer.vue";
     <Header />
   </HomeHeader>
 
-  <HomeProductCard />
+  <HomeInfoCard />
 
   <HomeCarousel />
 
