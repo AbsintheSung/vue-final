@@ -2,7 +2,7 @@
 import ProgressLine from "@/components/ProgressLine.vue";
 import CheckHeader from "@/layouts/CheckHeader.vue";
 import ProductItem from "@/components/ProductItem.vue";
-import ProductInfo from "@/views/CheckInfoPage/components/ProductInfo.vue";
+import ProductInfo from "@/views/checkoutinfo/components/ProductInfo.vue";
 </script>
 <template>
   <div class="container">
@@ -124,7 +124,10 @@ import ProductInfo from "@/views/CheckInfoPage/components/ProductInfo.vue";
           </div>
         </div> -->
         <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
-          <router-link to="/checkout" class="text-dark mt-md-0 mt-3"><i class="fas fa-chevron-left me-2"></i> Lorem ipsum</router-link>
+          <router-link to="/checkout" class="text-dark mt-md-0 mt-3">
+            <i class="fas fa-chevron-left me-2"></i>
+            Lorem ipsum
+          </router-link>
           <router-link to="/" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link>
         </div>
       </div>

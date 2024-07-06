@@ -29,7 +29,7 @@ const routes = [
   {
     path: "/checkoutinfo",
     name: "CheckInfoPage",
-    component: () => import("../views/CheckInfoPage/index.vue"),
+    component: () => import("../views/checkoutinfo/index.vue"),
   },
   {
     path: "/success",
