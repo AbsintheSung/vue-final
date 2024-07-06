@@ -128,7 +128,7 @@ import ProductInfo from "@/views/checkoutinfo/components/ProductInfo.vue";
             <i class="fas fa-chevron-left me-2"></i>
             Lorem ipsum
           </router-link>
-          <router-link to="/" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link>
+          <router-link to="/success" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link>
         </div>
       </div>
     </div>

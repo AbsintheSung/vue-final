@@ -34,7 +34,7 @@ const routes = [
   {
     path: "/success",
     name: "SuccessPage",
-    component: () => import("../views/SuccessPage/index.vue"),
+    component: () => import("../views/success/index.vue"),
   },
 ];
 
