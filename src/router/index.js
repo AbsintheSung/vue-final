@@ -14,7 +14,7 @@ const routes = [
   {
     path: "/detail",
     name: "DetailPage",
-    component: () => import("../views/DetailPage/index.vue"),
+    component: () => import("../views/detail/index.vue"),
   },
   {
     path: "/cart",
