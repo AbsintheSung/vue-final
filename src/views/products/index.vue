@@ -60,7 +60,7 @@ onMounted(() => {
   <div class="container mt-md-5 mt-3 mb-7">
     <div class="row">
       <ProductType :totalType="totalType" @sendType="handleProductType" />
-      <ProductCard />
+      <ProductCard :productData="productData" />
     </div>
   </div>
 
