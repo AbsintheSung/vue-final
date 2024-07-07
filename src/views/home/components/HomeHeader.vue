@@ -8,8 +8,8 @@ import HomeBackgroundImg from "@/assets/images/home_bg2.png";
       <slot></slot>
       <div class="row justify-content-center my-auto">
         <div class="col-md-4 text-center">
-          <h2>專業技能線上平台</h2>
-          <p class="text-muted mb-0">就是標榜帶你學到會</p>
+          <h2>XX玩具館</h2>
+          <p class="text-muted mb-0">各式公仔專賣店</p>
           <button class="btn btn-dark rounded-0 mt-6">點我進入</button>
         </div>
       </div>
