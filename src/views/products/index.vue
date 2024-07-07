@@ -3,6 +3,87 @@ import Header from "@/layouts/Header.vue";
 import Footer from "@/layouts/Footer.vue";
 import ProductCard from "@/views/products/components/ProductCard.vue";
 import ProductType from "@/views/products/components/ProductType.vue";
+import { ref, onMounted, provide, readonly } from "vue";
+import axios from "axios";
+const baseURL = import.meta.env.VITE_APP_API_URL;
+const apiName = import.meta.env.VITE_APP_API_NAME;
+const productData = ref([]);
+const totalType = ref([]);
+const paginationInfo = ref({});
+provide("paginationInfo", readonly(paginationInfo));
+const nextPages = async (pageInfo) => {
+  const { category: cateGory, current_page: currentPage, has_next: hasNext } = pageInfo;
+  if (!hasNext) {
+    return;
+  }
+  await handleProductPages(cateGory, Number(currentPage) + 1);
+};
+const prevPages = async (pageInfo) => {
+  const { category: cateGory, current_page: currentPage, has_pre: hasPre } = pageInfo;
+  if (!hasPre) {
+    return;
+  }
+  await handleProductPages(cateGory, Number(currentPage) - 1);
+};
+const pickPages = async (pageInfo, handlePages) => {
+  const { category: cateGory, current_page: currentPage } = pageInfo;
+  if (handlePages === currentPage) {
+    return;
+  }
+  await handleProductPages(cateGory, handlePages);
+};
+provide("nextPages", nextPages);
+provide("prevPages", prevPages);
+provide("pickPages", pickPages);
+
+const fetchProductData = async () => {
+  try {
+    const response = await axios(`${baseURL}/v2/api/${apiName}/products`);
+    productData.value = response.data.products;
+    paginationInfo.value = response.data.pagination;
+    totalType.value = ["所有商品", ...new Set(productData.value.map((item) => item.category))];
+  } catch (error) {
+    console.log(error);
+  }
+};
+const handleProductType = async (type) => {
+  if (type === "所有商品") {
+    try {
+      const response = await axios(`${baseURL}/v2/api/${apiName}/products`);
+      productData.value = response.data.products;
+      paginationInfo.value = response.data.pagination;
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    try {
+      const response = await axios(`${baseURL}/v2/api/${apiName}/products`, {
+        params: {
+          category: type,
+        },
+      });
+      productData.value = response.data.products;
+      paginationInfo.value = response.data.pagination;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+const handleProductPages = async (type = "", pages = "") => {
+  try {
+    const response = await axios(`${baseURL}/v2/api/${apiName}/products`, {
+      params: {
+        category: type,
+        page: pages,
+      },
+    });
+    productData.value = response.data.products;
+    paginationInfo.value = response.data.pagination;
+  } catch (error) {}
+};
+onMounted(() => {
+  fetchProductData();
+});
 </script>
 <template>
   <div class="container">
@@ -16,8 +97,8 @@ import ProductType from "@/views/products/components/ProductType.vue";
 
   <div class="container mt-md-5 mt-3 mb-7">
     <div class="row">
-      <ProductType />
-      <ProductCard />
+      <ProductType :totalType="totalType" @sendType="handleProductType" />
+      <ProductCard :productData="productData" />
     </div>
   </div>
 
