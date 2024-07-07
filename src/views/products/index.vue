@@ -11,28 +11,26 @@ const productData = ref([]);
 const totalType = ref([]);
 const paginationInfo = ref({});
 provide("paginationInfo", readonly(paginationInfo));
-const nextPages = (pageInfo) => {
+const nextPages = async (pageInfo) => {
   const { category: cateGory, current_page: currentPage, has_next: hasNext } = pageInfo;
   if (!hasNext) {
     return;
   }
-  const temp = cateGory === "" ? "全部商品" : cateGory;
-  console.log("發送", temp, currentPage);
+  await handleProductPages(cateGory, Number(currentPage) + 1);
 };
-const prevPages = (pageInfo) => {
+const prevPages = async (pageInfo) => {
   const { category: cateGory, current_page: currentPage, has_pre: hasPre } = pageInfo;
   if (!hasPre) {
     return;
   }
-  const temp = cateGory === "" ? "全部商品" : cateGory;
-  console.log("發送", temp, currentPage);
+  await handleProductPages(cateGory, Number(currentPage) - 1);
 };
-const pickPages = (pageInfo, handlePages) => {
+const pickPages = async (pageInfo, handlePages) => {
   const { category: cateGory, current_page: currentPage } = pageInfo;
   if (handlePages === currentPage) {
     return;
   }
-  console.log("發送", cateGory, currentPage, handlePages);
+  await handleProductPages(cateGory, handlePages);
 };
 provide("nextPages", nextPages);
 provide("prevPages", prevPages);
@@ -70,6 +68,18 @@ const handleProductType = async (type) => {
       console.log(error);
     }
   }
+};
+const handleProductPages = async (type = "", pages = "") => {
+  try {
+    const response = await axios(`${baseURL}/v2/api/${apiName}/products`, {
+      params: {
+        category: type,
+        page: pages,
+      },
+    });
+    productData.value = response.data.products;
+    paginationInfo.value = response.data.pagination;
+  } catch (error) {}
 };
 onMounted(() => {
   fetchProductData();
