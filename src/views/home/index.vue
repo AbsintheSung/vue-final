@@ -4,13 +4,13 @@ import Header from "@/layouts/Header.vue";
 import HomeHeader from "@/views/home/components/HomeHeader.vue";
 import HomeInfoCard from "@/views/home/components/HomeInfoCard.vue";
 import HomeCarousel from "@/views/home/components/HomeCarousel.vue";
-import HomeLecturer from "@/views/home/components/HomeLecturer .vue";
+// import HomeLecturer from "@/views/home/components/HomeLecturer .vue";
 import Footer from "@/layouts/Footer.vue";
 import axios from "axios";
 
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
-console.log(import.meta.env, apiName);
+
 const courseData = ref([]);
 const fetchCourseData = async () => {
   try {
@@ -33,7 +33,7 @@ onMounted(() => {
 
   <HomeCarousel :courseData="courseData" />
 
-  <HomeLecturer />
+  <!-- <HomeLecturer /> -->
   <Footer />
 </template>
 <style scoped></style>
