@@ -3,20 +3,23 @@ import Header from "@/layouts/Header.vue";
 import Footer from "@/layouts/Footer.vue";
 import ProductCard from "@/views/products/components/ProductCard.vue";
 import ProductType from "@/views/products/components/ProductType.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, provide, readonly } from "vue";
 import axios from "axios";
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
 const productData = ref([]);
 const totalType = ref([]);
+const paginationInfo = ref({});
+provide("paginationInfo", readonly(paginationInfo));
 // const totalType = computed(() => {
 //   return [...new Set(productData.value.map((item) => item.category))];
 // });
 
 const fetchProductData = async () => {
   try {
-    const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
+    const response = await axios(`${baseURL}/v2/api/${apiName}/products`);
     productData.value = response.data.products;
+    paginationInfo.value = response.data.pagination;
     totalType.value = ["所有商品", ...new Set(productData.value.map((item) => item.category))];
   } catch (error) {
     console.log(error);

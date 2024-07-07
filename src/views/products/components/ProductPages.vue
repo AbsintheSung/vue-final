@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import { inject } from "vue";
+const paginationInfo = inject("paginationInfo", {});
+console.log(paginationInfo);
+</script>
 <template>
   <nav class="d-flex justify-content-center">
     <ul class="pagination">
@@ -7,9 +11,12 @@
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item" v-for="(pageItem, index) in paginationInfo.total_pages" :key="pageItem" :class="{ active: index === 0 }">
+        <a class="page-link" href="#" @click.prevent>{{ pageItem }}</a>
+      </li>
+      <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
       <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li> -->
       <li class="page-item">
         <a class="page-link" href="#" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
