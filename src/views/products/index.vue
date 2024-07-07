@@ -3,19 +3,21 @@ import Header from "@/layouts/Header.vue";
 import Footer from "@/layouts/Footer.vue";
 import ProductCard from "@/views/products/components/ProductCard.vue";
 import ProductType from "@/views/products/components/ProductType.vue";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
 const productData = ref([]);
-const totalType = computed(() => {
-  return [...new Set(productData.value.map((item) => item.category))];
-});
+const totalType = ref([]);
+// const totalType = computed(() => {
+//   return [...new Set(productData.value.map((item) => item.category))];
+// });
 
 const fetchProductData = async () => {
   try {
     const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
     productData.value = response.data.products;
+    totalType.value = [...new Set(productData.value.map((item) => item.category))];
   } catch (error) {
     console.log(error);
   }
