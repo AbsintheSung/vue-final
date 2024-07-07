@@ -5,6 +5,18 @@ const props = defineProps({
     default: () => [],
   },
 });
+const emit = defineEmits({
+  sendType: (productType) => {
+    if (typeof productType === "string") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+});
+const getProductType = (productType) => {
+  emit("sendType", productType);
+};
 </script>
 <template>
   <div class="col-md-4">
@@ -20,7 +32,7 @@ const props = defineProps({
           <div class="card-body py-0">
             <ul class="list-unstyled">
               <li v-for="typeItem in props.totalType" :key="typeItem">
-                <a href="#" class="py-2 d-block text-muted">{{ typeItem }}</a>
+                <a href="#" class="py-2 d-block text-muted" @click.prevent="getProductType(typeItem)">{{ typeItem }}</a>
               </li>
               <!-- <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
               <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>

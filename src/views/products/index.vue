@@ -17,9 +17,30 @@ const fetchProductData = async () => {
   try {
     const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
     productData.value = response.data.products;
-    totalType.value = [...new Set(productData.value.map((item) => item.category))];
+    totalType.value = ["所有商品", ...new Set(productData.value.map((item) => item.category))];
   } catch (error) {
     console.log(error);
+  }
+};
+const handleProductType = async (type) => {
+  if (type === "所有商品") {
+    try {
+      const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
+      productData.value = response.data.products;
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    try {
+      const response = await axios(`${baseURL}/v2/api/${apiName}/products`, {
+        params: {
+          category: type,
+        },
+      });
+      productData.value = response.data.products;
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 onMounted(() => {
@@ -38,7 +59,7 @@ onMounted(() => {
 
   <div class="container mt-md-5 mt-3 mb-7">
     <div class="row">
-      <ProductType :totalType="totalType" />
+      <ProductType :totalType="totalType" @sendType="handleProductType" />
       <ProductCard />
     </div>
   </div>
