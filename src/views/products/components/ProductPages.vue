@@ -13,7 +13,7 @@ const pickPages = inject("pickPages");
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item" v-for="(pageItem, index) in paginationInfo.total_pages" :key="pageItem" :class="{ active: index === 0 }">
+      <li class="page-item" v-for="pageItem in paginationInfo.total_pages" :key="pageItem" :class="{ active: pageItem === paginationInfo.current_page }">
         <a class="page-link" href="#" @click.prevent="pickPages(paginationInfo, pageItem)">{{ pageItem }}</a>
       </li>
       <!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
