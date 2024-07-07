@@ -11,9 +11,6 @@ const productData = ref([]);
 const totalType = ref([]);
 const paginationInfo = ref({});
 provide("paginationInfo", readonly(paginationInfo));
-// const totalType = computed(() => {
-//   return [...new Set(productData.value.map((item) => item.category))];
-// });
 
 const fetchProductData = async () => {
   try {
