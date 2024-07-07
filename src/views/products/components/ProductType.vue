@@ -1,27 +1,37 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  totalType: {
+    type: Array,
+    default: () => [],
+  },
+});
+</script>
 <template>
   <div class="col-md-4">
     <div class="accordion border border-bottom border-top-0 border-start-0 border-end-0 mb-3" id="accordionExample">
       <div class="card border-0">
         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne">
           <div class="d-flex justify-content-between align-items-center pe-1">
-            <h4 class="mb-0">Lorem ipsum</h4>
+            <h4 class="mb-0">現貨商品</h4>
             <FontAwesomeIcon :icon="['fas', 'chevron-down']" />
           </div>
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="card-body py-0">
             <ul class="list-unstyled">
+              <li v-for="typeItem in props.totalType" :key="typeItem">
+                <a href="#" class="py-2 d-block text-muted">{{ typeItem }}</a>
+              </li>
+              <!-- <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
               <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
               <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
               <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
-              <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
-              <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
+              <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li> -->
             </ul>
           </div>
         </div>
       </div>
-      <div class="card border-0">
+      <!-- <div class="card border-0">
         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0" id="headingTwo" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
           <div class="d-flex justify-content-between align-items-center pe-1">
             <h4 class="mb-0">Lorem ipsum</h4>
@@ -39,8 +49,8 @@
             </ul>
           </div>
         </div>
-      </div>
-      <div class="card border-0">
+      </div> -->
+      <!-- <div class="card border-0">
         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0" id="headingThree" data-bs-toggle="collapse" data-bs-target="#collapseThree">
           <div class="d-flex justify-content-between align-items-center pe-1">
             <h4 class="mb-0">Lorem ipsum</h4>
@@ -58,7 +68,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

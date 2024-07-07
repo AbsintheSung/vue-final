@@ -3,6 +3,26 @@ import Header from "@/layouts/Header.vue";
 import Footer from "@/layouts/Footer.vue";
 import ProductCard from "@/views/products/components/ProductCard.vue";
 import ProductType from "@/views/products/components/ProductType.vue";
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+const baseURL = import.meta.env.VITE_APP_API_URL;
+const apiName = import.meta.env.VITE_APP_API_NAME;
+const productData = ref([]);
+const totalType = computed(() => {
+  return [...new Set(productData.value.map((item) => item.category))];
+});
+
+const fetchProductData = async () => {
+  try {
+    const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
+    productData.value = response.data.products;
+  } catch (error) {
+    console.log(error);
+  }
+};
+onMounted(() => {
+  fetchProductData();
+});
 </script>
 <template>
   <div class="container">
@@ -16,7 +36,7 @@ import ProductType from "@/views/products/components/ProductType.vue";
 
   <div class="container mt-md-5 mt-3 mb-7">
     <div class="row">
-      <ProductType />
+      <ProductType :totalType="totalType" />
       <ProductCard />
     </div>
   </div>
