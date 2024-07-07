@@ -11,6 +11,32 @@ const productData = ref([]);
 const totalType = ref([]);
 const paginationInfo = ref({});
 provide("paginationInfo", readonly(paginationInfo));
+const nextPages = (pageInfo) => {
+  const { category: cateGory, current_page: currentPage, has_next: hasNext } = pageInfo;
+  if (!hasNext) {
+    return;
+  }
+  const temp = cateGory === "" ? "全部商品" : cateGory;
+  console.log("發送", temp, currentPage);
+};
+const prevPages = (pageInfo) => {
+  const { category: cateGory, current_page: currentPage, has_pre: hasPre } = pageInfo;
+  if (!hasPre) {
+    return;
+  }
+  const temp = cateGory === "" ? "全部商品" : cateGory;
+  console.log("發送", temp, currentPage);
+};
+const pickPages = (pageInfo, handlePages) => {
+  const { category: cateGory, current_page: currentPage } = pageInfo;
+  if (handlePages === currentPage) {
+    return;
+  }
+  console.log("發送", cateGory, currentPage, handlePages);
+};
+provide("nextPages", nextPages);
+provide("prevPages", prevPages);
+provide("pickPages", pickPages);
 
 const fetchProductData = async () => {
   try {
@@ -25,8 +51,9 @@ const fetchProductData = async () => {
 const handleProductType = async (type) => {
   if (type === "所有商品") {
     try {
-      const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
+      const response = await axios(`${baseURL}/v2/api/${apiName}/products`);
       productData.value = response.data.products;
+      paginationInfo.value = response.data.pagination;
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +65,7 @@ const handleProductType = async (type) => {
         },
       });
       productData.value = response.data.products;
+      paginationInfo.value = response.data.pagination;
     } catch (error) {
       console.log(error);
     }
