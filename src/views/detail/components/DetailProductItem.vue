@@ -1,40 +1,34 @@
-<script setup></script>
+<script setup>
+// import { computed } from "vue";
+import DetailCarousel from "@/views/detail/components/DetailCarousel.vue";
+
+/* eslint-disable */
+const props = defineProps({
+  getOneProduct: {
+    type: Object,
+    default: () => {
+      return {};
+    },
+  },
+});
+/* eslint-enable */
+</script>
 <template>
   <div class="row align-items-center">
-    <div class="col-md-7">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" class="d-block w-100" alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" class="d-block w-100" alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" class="d-block w-100" alt="..." />
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
+    <DetailCarousel :onepProductImg="getOneProduct.imagesUrl" />
     <div class="col-md-5">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white px-0 mb-0 py-3">
-          <li class="breadcrumb-item"><a class="text-muted" href="./index.html">Home</a></li>
-          <li class="breadcrumb-item"><a class="text-muted" href="./product.html">Product</a></li>
+          <li class="breadcrumb-item"><router-link class="text-muted" to="/">Home</router-link></li>
+          <li class="breadcrumb-item"><router-link class="text-muted" to="/products">Product</router-link></li>
           <li class="breadcrumb-item active" aria-current="page">Detail</li>
         </ol>
       </nav>
-      <h2 class="fw-bold h1 mb-1">Lorem ipsum</h2>
-      <p class="mb-0 text-muted text-end"><del>NT$1,200</del></p>
-      <p class="h4 fw-bold text-end">NT$1,080</p>
+      <h2 class="fw-bold h1 mb-1">{{ getOneProduct.title }}</h2>
+      <p class="mb-0 text-muted text-end">
+        <del>NT${{ getOneProduct.origin_price }}</del>
+      </p>
+      <p class="h4 fw-bold text-end">NT${{ getOneProduct.price }}</p>
       <div class="row align-items-center">
         <div class="col-6">
           <div class="input-group my-3 bg-light rounded">
@@ -59,10 +53,12 @@
   </div>
   <div class="row my-5">
     <div class="col-md-4">
-      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p>
+      <p>{{ getOneProduct.description }}</p>
     </div>
     <div class="col-md-3">
-      <p class="text-muted">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+      <p class="text-muted">
+        {{ getOneProduct.content }}
+      </p>
     </div>
   </div>
 </template>

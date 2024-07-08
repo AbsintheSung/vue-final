@@ -20,7 +20,7 @@ const props = defineProps({
           </a>
           <div class="card-body p-0">
             <h4 class="mb-0 mt-3">
-              <router-link to="/detail">{{ item.title }}</router-link>
+              <router-link :to="`/detail/${item.id}`">{{ item.title }}</router-link>
             </h4>
             <p class="card-text mb-0">
               NT${{ item.origin_price }}
