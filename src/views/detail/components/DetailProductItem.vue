@@ -12,6 +12,9 @@ const props = defineProps({
   },
 });
 /* eslint-enable */
+setTimeout(() => {
+  console.log(props.getOneProduct);
+}, 1000);
 </script>
 <template>
   <div class="row align-items-center">
@@ -19,14 +22,16 @@ const props = defineProps({
     <div class="col-md-5">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white px-0 mb-0 py-3">
-          <li class="breadcrumb-item"><a class="text-muted" href="./index.html">Home</a></li>
-          <li class="breadcrumb-item"><a class="text-muted" href="./product.html">Product</a></li>
+          <li class="breadcrumb-item"><router-link class="text-muted" to="/">Home</router-link></li>
+          <li class="breadcrumb-item"><router-link class="text-muted" to="/products">Product</router-link></li>
           <li class="breadcrumb-item active" aria-current="page">Detail</li>
         </ol>
       </nav>
-      <h2 class="fw-bold h1 mb-1">Lorem ipsum</h2>
-      <p class="mb-0 text-muted text-end"><del>NT$1,200</del></p>
-      <p class="h4 fw-bold text-end">NT$1,080</p>
+      <h2 class="fw-bold h1 mb-1">{{ getOneProduct.title }}</h2>
+      <p class="mb-0 text-muted text-end">
+        <del>NT${{ getOneProduct.origin_price }}</del>
+      </p>
+      <p class="h4 fw-bold text-end">NT${{ getOneProduct.price }}</p>
       <div class="row align-items-center">
         <div class="col-6">
           <div class="input-group my-3 bg-light rounded">
@@ -51,10 +56,12 @@ const props = defineProps({
   </div>
   <div class="row my-5">
     <div class="col-md-4">
-      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</p>
+      <p>{{ getOneProduct.description }}</p>
     </div>
     <div class="col-md-3">
-      <p class="text-muted">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+      <p class="text-muted">
+        {{ getOneProduct.content }}
+      </p>
     </div>
   </div>
 </template>
