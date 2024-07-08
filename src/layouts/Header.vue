@@ -13,7 +13,7 @@
             <span class="sr-only">(current)</span>
           </router-link>
           <router-link class="nav-item nav-link me-4" to="/products">Product</router-link>
-          <router-link class="nav-item nav-link me-4" to="detail">Detail</router-link>
+          <!-- <router-link class="nav-item nav-link me-4" to="detail">Detail</router-link> -->
           <router-link class="nav-item nav-link" to="/cart"><FontAwesomeIcon :icon="['fas', 'shopping-cart']" /></router-link>
         </div>
       </div>

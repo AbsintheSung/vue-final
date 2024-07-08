@@ -12,7 +12,7 @@ const routes = [
     component: () => import("../views/products/index.vue"),
   },
   {
-    path: "/detail",
+    path: "/detail/:productId",
     name: "DetailPage",
     component: () => import("../views/detail/index.vue"),
   },
@@ -43,7 +43,7 @@ const router = createRouter({
   linkActiveClass: "active",
   // eslint-disable-next-line
   scrollBehavior() {
-    return { top: 0 }
+    return { top: 0 };
   },
   routes,
 });

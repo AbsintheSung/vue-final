@@ -18,7 +18,7 @@ const props = defineProps({
             <div class="row justify-content-center py-7">
               <div class="col-md-6 text-center">
                 <h3>
-                  <router-link to="detail">{{ courseItem.title }}</router-link>
+                  <router-link :to="`/detail/${courseItem.id}`">{{ courseItem.title }}</router-link>
                 </h3>
                 <p class="my-5">{{ courseItem.description }}</p>
                 <p>

@@ -10,7 +10,6 @@ import axios from "axios";
 
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
-
 const courseData = ref([]);
 const fetchCourseData = async () => {
   try {
