@@ -12,9 +12,6 @@ const props = defineProps({
   },
 });
 /* eslint-enable */
-setTimeout(() => {
-  console.log(props.getOneProduct);
-}, 1000);
 </script>
 <template>
   <div class="row align-items-center">

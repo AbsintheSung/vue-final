@@ -10,6 +10,8 @@ import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
+
+/* eslint-disable */
 const props = defineProps({
   allProductData: {
     type: Array,
@@ -18,6 +20,8 @@ const props = defineProps({
     },
   },
 });
+/* eslint-enable */
+
 watch(
   () => route.params,
   (newId, oldid) => {
@@ -25,7 +29,6 @@ watch(
     // console.log(newId, oldid);
   }
 );
-// const num = ref(10);
 const swiperOptions = {
   modules: [Mousewheel, Pagination],
   slidesPerView: 1, // 滾動時候 只切換一張
@@ -47,7 +50,6 @@ const swiperOptions = {
     },
   },
 };
-console.log(props.allProductData);
 </script>
 <template>
   <h3 class="fw-bold">Lorem ipsum dolor sit amet</h3>

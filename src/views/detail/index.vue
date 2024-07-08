@@ -26,7 +26,6 @@ const fetchAllProductData = async () => {
   try {
     const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
     allProductData.value = response.data.products;
-    console.log(allProductData.value);
   } catch (error) {
     console.log(error);
   }
