@@ -39,20 +39,21 @@ console.log(props.allProductData);
 </script>
 <template>
   <h3 class="fw-bold">Lorem ipsum dolor sit amet</h3>
-  <swiper class="" :loop="true" v-bind="swiperOptions">
+  <template v-if="allProductData.length === 0"></template>
+  <swiper v-else class="" :loop="true" v-bind="swiperOptions">
     <swiper-slide v-for="item in allProductData" :key="item">
       <div class="card border-0 mb-4 position-relative position-relative">
         <img :src="item.imageUrl" class="card-img-top rounded-0" style="height: 250px" alt="..." />
-        <a href="#" class="text-dark"> </a>
+        <a href="#" class="text-dark"></a>
         <div class="card-body p-0">
           <h4 class="mb-0 mt-3">
             <router-link :to="`/`">{{ item.title }}</router-link>
           </h4>
           <p class="card-text mb-0">
             NT${{ item.price }}
-            <span class="text-muted"
-              ><del>NT${{ item.origin_price }}</del></span
-            >
+            <span class="text-muted">
+              <del>NT${{ item.origin_price }}</del>
+            </span>
           </p>
           <p class="text-muted mt-3"></p>
         </div>
