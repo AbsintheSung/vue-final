@@ -5,6 +5,11 @@ import { Mousewheel, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/mousewheel";
+import { watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
 const props = defineProps({
   allProductData: {
     type: Array,
@@ -13,6 +18,13 @@ const props = defineProps({
     },
   },
 });
+watch(
+  () => route.params,
+  (newId, oldid) => {
+    router.go(`/detail/${newId}`);
+    // console.log(newId, oldid);
+  }
+);
 // const num = ref(10);
 const swiperOptions = {
   modules: [Mousewheel, Pagination],
@@ -47,7 +59,7 @@ console.log(props.allProductData);
         <a href="#" class="text-dark"></a>
         <div class="card-body p-0">
           <h4 class="mb-0 mt-3">
-            <router-link :to="`/`">{{ item.title }}</router-link>
+            <router-link :to="`/detail/${item.id}`">{{ item.title }}</router-link>
           </h4>
           <p class="card-text mb-0">
             NT${{ item.price }}
