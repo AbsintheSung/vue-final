@@ -13,6 +13,7 @@ const productId = route.params.productId;
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
 const oneProductData = ref({});
+const allProductData = ref([]);
 const fetchOneProductData = async () => {
   try {
     const response = await axios(`${baseURL}/v2/api/${apiName}/product/${productId}`);
@@ -21,15 +22,25 @@ const fetchOneProductData = async () => {
     console.log(error);
   }
 };
+const fetchAllProductData = async () => {
+  try {
+    const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
+    allProductData.value = response.data.products;
+    console.log(allProductData.value);
+  } catch (error) {
+    console.log(error);
+  }
+};
 onMounted(() => {
   fetchOneProductData();
+  fetchAllProductData();
 });
 </script>
 <template>
   <div class="container">
     <Header />
     <DetailProductItem :getOneProduct="oneProductData" />
-    <ProductSwiper />
+    <ProductSwiper :allProductData="allProductData" />
   </div>
   <Footer />
 </template>

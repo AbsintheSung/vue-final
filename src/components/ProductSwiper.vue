@@ -1,12 +1,19 @@
 <script setup>
-import { ref } from "vue";
+// import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Mousewheel, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/mousewheel";
-
-const num = ref(10);
+const props = defineProps({
+  allProductData: {
+    type: Array,
+    default: () => {
+      return [];
+    },
+  },
+});
+// const num = ref(10);
 const swiperOptions = {
   modules: [Mousewheel, Pagination],
   slidesPerView: 1, // 滾動時候 只切換一張
@@ -28,18 +35,24 @@ const swiperOptions = {
     },
   },
 };
+console.log(props.allProductData);
 </script>
 <template>
   <h3 class="fw-bold">Lorem ipsum dolor sit amet</h3>
   <swiper class="" :loop="true" v-bind="swiperOptions">
-    <swiper-slide v-for="item in num" :key="item">
+    <swiper-slide v-for="item in allProductData" :key="item">
       <div class="card border-0 mb-4 position-relative position-relative">
-        <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="card-img-top rounded-0" alt="..." />
+        <img :src="item.imageUrl" class="card-img-top rounded-0" style="height: 250px" alt="..." />
         <a href="#" class="text-dark"> </a>
         <div class="card-body p-0">
-          <h4 class="mb-0 mt-3"><a href="#">Lorem ipsum</a></h4>
+          <h4 class="mb-0 mt-3">
+            <router-link :to="`/`">{{ item.title }}</router-link>
+          </h4>
           <p class="card-text mb-0">
-            NT$1,080 <span class="text-muted"><del>NT$1,200</del></span>
+            NT${{ item.price }}
+            <span class="text-muted"
+              ><del>NT${{ item.origin_price }}</del></span
+            >
           </p>
           <p class="text-muted mt-3"></p>
         </div>
