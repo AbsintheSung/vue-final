@@ -1,5 +1,6 @@
 <script setup>
 // import { computed } from "vue";
+import DetailCarousel from "@/views/detail/components/DetailCarousel.vue";
 
 /* eslint-disable */
 const props = defineProps({
@@ -14,23 +15,7 @@ const props = defineProps({
 </script>
 <template>
   <div class="row align-items-center">
-    <div class="col-md-7">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item" v-for="(item, index) in getOneProduct.imagesUrl" :key="item" :class="{ active: index === 0 }">
-            <img :src="item" class="d-block w-100" :alt="`圖片-${index}`" style="height: 500px; object-fit: fill" />
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden"></span>
-        </button>
-      </div>
-    </div>
+    <DetailCarousel :onepProductImg="getOneProduct.imagesUrl" />
     <div class="col-md-5">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white px-0 mb-0 py-3">
