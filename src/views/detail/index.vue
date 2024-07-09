@@ -7,7 +7,7 @@ import ProductSwiper from "@/components/ProductSwiper.vue";
 import DetailProductItem from "@/views/detail/components/DetailProductItem.vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, provide } from "vue";
 const route = useRoute();
 const productId = route.params.productId;
 const baseURL = import.meta.env.VITE_APP_API_URL;
@@ -30,6 +30,24 @@ const fetchAllProductData = async () => {
     console.log(error);
   }
 };
+const addProductCart = async (qty) => {
+  const dataInfo = {
+    data: {
+      product_id: productId,
+      qty: qty,
+    },
+  };
+  try {
+    const response = await axios.post(`${baseURL}/v2/api/${apiName}/cart`, dataInfo);
+    // console.log(response.status, response.data);
+    if (response.status === 200) {
+      console.log("顯示彈窗，確認是否繼續購物跳轉product頁面或是購物車明細頁面");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+provide("addProductCart", addProductCart);
 onMounted(() => {
   fetchOneProductData();
   fetchAllProductData();
