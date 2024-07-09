@@ -22,7 +22,8 @@
                 <FontAwesomeIcon :icon="['fas', 'minus']" />
               </button>
             </div>
-            <input type="text" class="form-control border-0 text-center my-auto shadow-none" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" />
+            <!-- <input type="text" class="form-control border-0 text-center my-auto shadow-none" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" /> -->
+            <p class="form-control border-0 text-center my-auto shadow-none">1</p>
             <div class="input-group-append">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
                 <FontAwesomeIcon :icon="['fas', 'plus']" />
