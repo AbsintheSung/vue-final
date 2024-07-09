@@ -1,7 +1,7 @@
 <script setup>
 // import { computed } from "vue";
 import DetailCarousel from "@/views/detail/components/DetailCarousel.vue";
-import { ref } from "vue";
+import { ref, inject } from "vue";
 /* eslint-disable */
 const props = defineProps({
   getOneProduct: {
@@ -31,11 +31,9 @@ const userInput = (event) => {
   pruductQuantity.value = inputValue.replace(/\D/g, "");
   if (pruductQuantity.value === "" || pruductQuantity.value === "0" || /^0+\d+$/.test(pruductQuantity.value)) {
     pruductQuantity.value = 1;
-    event.target.value = pruductQuantity.value;
-  } else {
-    event.target.value = pruductQuantity.value;
   }
 };
+const addProductCart = inject("addProductCart");
 </script>
 <template>
   <div class="row align-items-center">
@@ -61,7 +59,7 @@ const userInput = (event) => {
                 <FontAwesomeIcon :icon="['fas', 'minus']" />
               </button>
             </div>
-            <input type="text" class="form-control border-0 text-center my-auto shadow-none bg-light" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" min="1" :value="pruductQuantity" @blur="userInput" />
+            <input type="text" class="form-control border-0 text-center my-auto shadow-none bg-light" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" min="1" v-model="pruductQuantity" @blur="userInput" />
             <div class="input-group-append">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2" @click="addQuantity">
                 <FontAwesomeIcon :icon="['fas', 'plus']" />
@@ -70,7 +68,7 @@ const userInput = (event) => {
           </div>
         </div>
         <div class="col-6">
-          <a href="#" @click.prevent="test" class="text-nowrap btn btn-dark w-100 py-2">Lorem ipsum</a>
+          <a href="#" @click.prevent="addProductCart(pruductQuantity)" class="text-nowrap btn btn-dark w-100 py-2">Lorem ipsum</a>
         </div>
       </div>
     </div>
