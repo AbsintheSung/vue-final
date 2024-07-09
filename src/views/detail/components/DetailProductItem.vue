@@ -34,13 +34,13 @@ const props = defineProps({
           <div class="input-group my-3 bg-light rounded">
             <div class="input-group-prepend">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
-                <i class="fas fa-minus"></i>
+                <FontAwesomeIcon :icon="['fas', 'minus']" />
               </button>
             </div>
             <input type="text" class="form-control border-0 text-center my-auto shadow-none bg-light" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" />
             <div class="input-group-append">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
-                <i class="fas fa-plus"></i>
+                <FontAwesomeIcon :icon="['fas', 'plus']" />
               </button>
             </div>
           </div>
