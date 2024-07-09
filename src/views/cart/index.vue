@@ -5,14 +5,24 @@ import ProductSwiper from "@/components/ProductSwiper.vue";
 import CartTable from "@/views/cart/components/CartTable.vue";
 import CartItem from "@/views/cart/components/CartItme.vue";
 import axios from "axios";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
+const allProductData = ref([]);
 const fetchCartsData = async () => {
   const response = await axios(`${baseURL}/v2/api/${apiName}/cart`);
   console.log(response);
 };
+const fetchAllProductData = async () => {
+  try {
+    const response = await axios(`${baseURL}/v2/api/${apiName}/products/all`);
+    allProductData.value = response.data.products;
+  } catch (error) {
+    console.log(error);
+  }
+};
 onMounted(() => {
+  fetchAllProductData();
   fetchCartsData();
 });
 </script>
@@ -30,7 +40,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="my-5">
-        <ProductSwiper />
+        <ProductSwiper :allProductData="allProductData" />
       </div>
     </div>
   </div>
