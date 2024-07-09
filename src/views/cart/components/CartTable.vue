@@ -19,19 +19,19 @@
           <div class="input-group pe-5">
             <div class="input-group-prepend">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
-                <i class="fas fa-minus"></i>
+                <FontAwesomeIcon :icon="['fas', 'minus']" />
               </button>
             </div>
             <input type="text" class="form-control border-0 text-center my-auto shadow-none" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" />
             <div class="input-group-append">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
-                <i class="fas fa-plus"></i>
+                <FontAwesomeIcon :icon="['fas', 'plus']" />
               </button>
             </div>
           </div>
         </td>
         <td class="border-0 align-middle"><p class="mb-0 ms-auto">NT$12,000</p></td>
-        <td class="border-0 align-middle"><i class="fas fa-times"></i></td>
+        <td class="border-0 align-middle"><FontAwesomeIcon :icon="['fas', 'times']" /></td>
       </tr>
       <!-- <tr class="border-bottom">
         <th scope="row" class="border-0 px-0 font-weight-normal py-4">
@@ -61,7 +61,7 @@
   <div class="input-group w-50 mb-3">
     <input type="text" class="form-control rounded-0 border-bottom border-top-0 border-start-0 border-end-0 shadow-none" placeholder="Coupon Code" aria-label="Recipient's username" aria-describedby="button-addon2" />
     <div class="input-group-append">
-      <button class="btn btn-outline-dark border-bottom border-top-0 border-start-0 border-end-0 rounded-0" type="button" id="button-addon2"><i class="fas fa-paper-plane"></i></button>
+      <button class="btn btn-outline-dark border-bottom border-top-0 border-start-0 border-end-0 rounded-0" type="button" id="button-addon2"><FontAwesomeIcon :icon="['fas', 'paper-plane']" /></button>
     </div>
   </div>
 </template>
