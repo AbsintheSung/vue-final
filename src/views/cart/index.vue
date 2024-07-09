@@ -4,6 +4,7 @@ import Footer from "@/layouts/Footer.vue";
 import ProductSwiper from "@/components/ProductSwiper.vue";
 import CartTable from "@/views/cart/components/CartTable.vue";
 import CartItem from "@/views/cart/components/CartItme.vue";
+import CaartCoupon from "@/views/cart/components/CaartCoupon.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 const baseURL = import.meta.env.VITE_APP_API_URL;
@@ -34,6 +35,7 @@ onMounted(() => {
       <div class="row">
         <div class="col-md-8">
           <CartTable />
+          <CaartCoupon />
         </div>
         <div class="col-md-4">
           <CartItem />
