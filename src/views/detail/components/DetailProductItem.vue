@@ -1,7 +1,7 @@
 <script setup>
 // import { computed } from "vue";
 import DetailCarousel from "@/views/detail/components/DetailCarousel.vue";
-
+import { ref } from "vue";
 /* eslint-disable */
 const props = defineProps({
   getOneProduct: {
@@ -12,6 +12,30 @@ const props = defineProps({
   },
 });
 /* eslint-enable */
+const pruductQuantity = ref(1);
+const addQuantity = () => {
+  pruductQuantity.value++;
+  console.log(pruductQuantity.value);
+};
+const reduceQuantity = () => {
+  if (pruductQuantity.value === 1) {
+    pruductQuantity.value = 1;
+  } else {
+    pruductQuantity.value--;
+  }
+  console.log(pruductQuantity.value);
+};
+// 使用 @blur 失去焦點才執行
+const userInput = (event) => {
+  const inputValue = event.target.value;
+  pruductQuantity.value = inputValue.replace(/\D/g, "");
+  if (pruductQuantity.value === "" || pruductQuantity.value === "0" || /^0+\d+$/.test(pruductQuantity.value)) {
+    pruductQuantity.value = 1;
+    event.target.value = pruductQuantity.value;
+  } else {
+    event.target.value = pruductQuantity.value;
+  }
+};
 </script>
 <template>
   <div class="row align-items-center">
@@ -33,20 +57,20 @@ const props = defineProps({
         <div class="col-6">
           <div class="input-group my-3 bg-light rounded">
             <div class="input-group-prepend">
-              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
+              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1" @click="reduceQuantity">
                 <FontAwesomeIcon :icon="['fas', 'minus']" />
               </button>
             </div>
-            <input type="text" class="form-control border-0 text-center my-auto shadow-none bg-light" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" />
+            <input type="text" class="form-control border-0 text-center my-auto shadow-none bg-light" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" min="1" :value="pruductQuantity" @blur="userInput" />
             <div class="input-group-append">
-              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
+              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2" @click="addQuantity">
                 <FontAwesomeIcon :icon="['fas', 'plus']" />
               </button>
             </div>
           </div>
         </div>
         <div class="col-6">
-          <a href="./checkout.html" class="text-nowrap btn btn-dark w-100 py-2">Lorem ipsum</a>
+          <a href="#" @click.prevent="test" class="text-nowrap btn btn-dark w-100 py-2">Lorem ipsum</a>
         </div>
       </div>
     </div>
