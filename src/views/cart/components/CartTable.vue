@@ -16,6 +16,9 @@ const emits = defineEmits({
   reduceCartQuantity: (data) => {
     return true;
   },
+  delCart: (data) => {
+    return true;
+  },
 });
 const addCartQuantity = (productId, productQty) => {
   const product = {
@@ -34,6 +37,9 @@ const reduceCartQuantity = (productId, productQty) => {
     },
   };
   emits("reduceCartQuantity", product);
+};
+const delCart = (productId) => {
+  emits("delCart", productId);
 };
 const cartsData = computed(() => [...props.allCartProducts]);
 </script>
@@ -72,7 +78,7 @@ const cartsData = computed(() => [...props.allCartProducts]);
         <td class="border-0 align-middle">
           <p class="mb-0 ms-auto">NT${{ cartItem.total }}</p>
         </td>
-        <td class="border-0 align-middle"><FontAwesomeIcon :icon="['fas', 'times']" /></td>
+        <td class="border-0 align-middle"><FontAwesomeIcon :icon="['fas', 'times']" @click="delCart(cartItem.id)" /></td>
       </tr>
       <!-- <tr class="border-bottom">
         <th scope="row" class="border-0 px-0 font-weight-normal py-4">

@@ -46,6 +46,16 @@ const handleReduceCart = async (cartData) => {
     console.log(error);
   }
 };
+const handleDelCart = async (cartId) => {
+  try {
+    const response = await axios.delete(`${baseURL}/v2/api/${apiName}/cart/${cartId}`);
+    if (response.status === 200) {
+      await fetchCartsData();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 onMounted(() => {
   fetchAllProductData();
   fetchCartsData();
@@ -58,7 +68,7 @@ onMounted(() => {
       <h3 class="mt-3 mb-4">Lorem ipsum</h3>
       <div class="row">
         <div class="col-md-8">
-          <CartTable :allCartProducts="allCartProducts" @addCartQuantity="handleAddCart" @reduceCartQuantity="handleReduceCart" />
+          <CartTable :allCartProducts="allCartProducts" @addCartQuantity="handleAddCart" @reduceCartQuantity="handleReduceCart" @delCart="handleDelCart" />
           <CaartCoupon />
         </div>
         <div class="col-md-4">
