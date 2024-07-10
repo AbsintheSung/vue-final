@@ -54,6 +54,11 @@ const handleFormConfirm = async (validate) => {
       <Field name="address" type="text" class="form-control" id="ContactAddress" placeholder="高雄市三民區" />
       <ErrorMessage name="address" />
     </div>
+    <div class="mb-2">
+      <label for="Message" class="text-muted mb-0">Address</label>
+      <Field name="Message" type="text" class="form-control" id="ContactAddress" placeholder="留言處" />
+      <ErrorMessage name="Message" />
+    </div>
     <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
       <router-link to="/products" class="text-dark mt-md-0 mt-3">
         <FontAwesomeIcon class="me-2" :icon="['fas', 'chevron-left']" />
