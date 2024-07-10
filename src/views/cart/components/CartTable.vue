@@ -9,10 +9,21 @@ const props = defineProps({
     },
   },
 });
+const emits = defineEmits({
+  addCartQuantity: (data) => {
+    return true;
+  },
+});
+const addCartQuantity = (productId, productQty) => {
+  const product = {
+    data: {
+      product_id: productId,
+      qty: productQty + 1,
+    },
+  };
+  emits("addCartQuantity", product);
+};
 const cartsData = computed(() => [...props.allCartProducts]);
-setTimeout(() => {
-  console.log(cartsData.value[0]);
-}, 1000);
 </script>
 <template>
   <table v-if="cartsData.length > 0" class="table">
@@ -41,7 +52,7 @@ setTimeout(() => {
             <p class="form-control border-0 text-center my-auto shadow-none">{{ cartItem.qty }}</p>
             <div class="input-group-append">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
-                <FontAwesomeIcon :icon="['fas', 'plus']" />
+                <FontAwesomeIcon :icon="['fas', 'plus']" @click="addCartQuantity(cartItem.id, cartItem.qty)" />
               </button>
             </div>
           </div>
