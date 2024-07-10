@@ -62,15 +62,15 @@ const cartsData = computed(() => [...props.allCartProducts]);
         <td class="border-0 align-middle" style="max-width: 160px">
           <div class="input-group pe-5">
             <div class="input-group-prepend">
-              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
-                <FontAwesomeIcon :icon="['fas', 'minus']" @click="reduceCartQuantity(cartItem.id, cartItem.qty)" />
+              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1" @click="reduceCartQuantity(cartItem.id, cartItem.qty)">
+                <FontAwesomeIcon :icon="['fas', 'minus']" />
               </button>
             </div>
             <!-- <input type="text" class="form-control border-0 text-center my-auto shadow-none" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" /> -->
             <p class="form-control border-0 text-center my-auto shadow-none">{{ cartItem.qty }}</p>
             <div class="input-group-append">
-              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
-                <FontAwesomeIcon :icon="['fas', 'plus']" @click="addCartQuantity(cartItem.id, cartItem.qty)" />
+              <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2" @click="addCartQuantity(cartItem.id, cartItem.qty)">
+                <FontAwesomeIcon :icon="['fas', 'plus']" />
               </button>
             </div>
           </div>
