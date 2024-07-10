@@ -1,19 +1,34 @@
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+
+const props = defineProps({
+  allCartProducts: {
+    type: Array,
+    default: () => {
+      return [];
+    },
+  },
+});
+const cartsData = computed(() => [...props.allCartProducts]);
+setTimeout(() => {
+  console.log(cartsData.value[0]);
+}, 1000);
+</script>
 <template>
-  <table class="table">
+  <table v-if="cartsData.length > 0" class="table">
     <thead>
       <tr>
-        <th scope="col" class="border-0 ps-0">Lorem ipsum</th>
-        <th scope="col" class="border-0">Lorem ipsum</th>
-        <th scope="col" class="border-0">Lorem ipsum</th>
-        <th scope="col" class="border-0"></th>
+        <th scope="col" class="border-0 ps-0">商品項目</th>
+        <th scope="col" class="border-0">商品數量</th>
+        <th scope="col" class="border-0">商品價格</th>
+        <th scope="col" class="border-0">刪除</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="border-bottom border-top">
+      <tr class="border-bottom border-top" v-for="cartItem in cartsData" :key="cartItem.product.id">
         <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-          <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" alt="" style="width: 72px; height: 72px; object-fit: cover" />
-          <p class="mb-0 fw-bold ms-3 d-inline-block">Lorem ipsum</p>
+          <img :src="cartItem.product.imageUrl" alt="" style="width: 72px; height: 72px; object-fit: cover" />
+          <p class="mb-0 fw-bold ms-3 d-inline-block">{{ cartItem.product.title }}</p>
         </th>
         <td class="border-0 align-middle" style="max-width: 160px">
           <div class="input-group pe-5">
@@ -23,7 +38,7 @@
               </button>
             </div>
             <!-- <input type="text" class="form-control border-0 text-center my-auto shadow-none" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" /> -->
-            <p class="form-control border-0 text-center my-auto shadow-none">1</p>
+            <p class="form-control border-0 text-center my-auto shadow-none">{{ cartItem.qty }}</p>
             <div class="input-group-append">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
                 <FontAwesomeIcon :icon="['fas', 'plus']" />
@@ -31,7 +46,9 @@
             </div>
           </div>
         </td>
-        <td class="border-0 align-middle"><p class="mb-0 ms-auto">NT$12,000</p></td>
+        <td class="border-0 align-middle">
+          <p class="mb-0 ms-auto">NT${{ cartItem.total }}</p>
+        </td>
         <td class="border-0 align-middle"><FontAwesomeIcon :icon="['fas', 'times']" /></td>
       </tr>
       <!-- <tr class="border-bottom">

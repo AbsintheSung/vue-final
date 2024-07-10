@@ -10,9 +10,10 @@ import { ref, onMounted } from "vue";
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
 const allProductData = ref([]);
+const allCartProducts = ref([]);
 const fetchCartsData = async () => {
   const response = await axios(`${baseURL}/v2/api/${apiName}/cart`);
-  console.log(response);
+  allCartProducts.value = response.data.data.carts;
 };
 const fetchAllProductData = async () => {
   try {
@@ -34,7 +35,7 @@ onMounted(() => {
       <h3 class="mt-3 mb-4">Lorem ipsum</h3>
       <div class="row">
         <div class="col-md-8">
-          <CartTable />
+          <CartTable :allCartProducts="allCartProducts" />
           <CaartCoupon />
         </div>
         <div class="col-md-4">
