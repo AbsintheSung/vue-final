@@ -13,6 +13,9 @@ const emits = defineEmits({
   addCartQuantity: (data) => {
     return true;
   },
+  reduceCartQuantity: (data) => {
+    return true;
+  },
 });
 const addCartQuantity = (productId, productQty) => {
   const product = {
@@ -22,6 +25,15 @@ const addCartQuantity = (productId, productQty) => {
     },
   };
   emits("addCartQuantity", product);
+};
+const reduceCartQuantity = (productId, productQty) => {
+  const product = {
+    data: {
+      product_id: productId,
+      qty: productQty - 1,
+    },
+  };
+  emits("reduceCartQuantity", product);
 };
 const cartsData = computed(() => [...props.allCartProducts]);
 </script>
@@ -45,7 +57,7 @@ const cartsData = computed(() => [...props.allCartProducts]);
           <div class="input-group pe-5">
             <div class="input-group-prepend">
               <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
-                <FontAwesomeIcon :icon="['fas', 'minus']" />
+                <FontAwesomeIcon :icon="['fas', 'minus']" @click="reduceCartQuantity(cartItem.id, cartItem.qty)" />
               </button>
             </div>
             <!-- <input type="text" class="form-control border-0 text-center my-auto shadow-none" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" /> -->

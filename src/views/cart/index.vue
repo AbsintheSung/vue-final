@@ -33,6 +33,19 @@ const handleAddCart = async (cartData) => {
     console.log(error);
   }
 };
+const handleReduceCart = async (cartData) => {
+  if (cartData.data.qty <= 0) {
+    return;
+  }
+  try {
+    const response = await axios.put(`${baseURL}/v2/api/${apiName}/cart/${cartData.data.product_id}`, cartData);
+    if (response.status === 200) {
+      await fetchCartsData();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 onMounted(() => {
   fetchAllProductData();
   fetchCartsData();
@@ -45,7 +58,7 @@ onMounted(() => {
       <h3 class="mt-3 mb-4">Lorem ipsum</h3>
       <div class="row">
         <div class="col-md-8">
-          <CartTable :allCartProducts="allCartProducts" @addCartQuantity="handleAddCart" />
+          <CartTable :allCartProducts="allCartProducts" @addCartQuantity="handleAddCart" @reduceCartQuantity="handleReduceCart" />
           <CaartCoupon />
         </div>
         <div class="col-md-4">
