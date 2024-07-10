@@ -11,8 +11,11 @@ const baseURL = import.meta.env.VITE_APP_API_URL;
 const apiName = import.meta.env.VITE_APP_API_NAME;
 const allProductData = ref([]);
 const allCartProducts = ref([]);
+const priceInfo = ref({});
 const fetchCartsData = async () => {
   const response = await axios(`${baseURL}/v2/api/${apiName}/cart`);
+  const { final_total: finalTotal, total } = response.data.data;
+  priceInfo.value = { final_total: finalTotal, total };
   allCartProducts.value = response.data.data.carts;
 };
 const fetchAllProductData = async () => {
@@ -72,7 +75,7 @@ onMounted(() => {
           <CaartCoupon />
         </div>
         <div class="col-md-4">
-          <CartItem />
+          <CartItem :priceInfo="priceInfo" />
         </div>
       </div>
       <div class="my-5">
