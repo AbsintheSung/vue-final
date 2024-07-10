@@ -47,28 +47,28 @@ const handleFormConfirm = async (validate, resetForm) => {
 <template>
   <Form :validation-schema="schema" v-slot="{ validate, resetForm }">
     <p>Contact information</p>
-    <div class="mb-2">
-      <label for="ContactMail" class="text-muted mb-0">Email</label>
+    <div class="mb-3">
+      <label for="ContactMail" class="text-muted mb-1">Email</label>
       <Field name="email" type="email" class="form-control" id="ContactMail" aria-describedby="emailHelp" placeholder="example@gmail.com" v-model="userInput.userEmail" />
       <ErrorMessage name="email" />
     </div>
-    <div class="mb-2">
-      <label for="ContactName" class="text-muted mb-0">Name</label>
+    <div class="mb-3">
+      <label for="ContactName" class="text-muted mb-1">Name</label>
       <Field name="userName" type="text" class="form-control" id="ContactName" placeholder="Carmen A. Rose" v-model="userInput.userName" />
       <ErrorMessage name="userName" />
     </div>
-    <div class="mb-2">
-      <label for="ContactPhone" class="text-muted mb-0">Phone</label>
+    <div class="mb-3">
+      <label for="ContactPhone" class="text-muted mb-1">Phone</label>
       <Field name="phone" type="text" class="form-control" id="ContactPhone" placeholder="0911123123" v-model="userInput.userphone" />
       <ErrorMessage name="phone" />
     </div>
-    <div class="mb-2">
-      <label for="ContactAddress" class="text-muted mb-0">Address</label>
+    <div class="mb-3">
+      <label for="ContactAddress" class="text-muted mb-1">Address</label>
       <Field name="address" type="text" class="form-control" id="ContactAddress" placeholder="高雄市三民區" v-model="userInput.userAddress" />
       <ErrorMessage name="address" />
     </div>
-    <div class="mb-2">
-      <label for="Message" class="text-muted mb-0">Message</label>
+    <div class="mb-3">
+      <label for="Message" class="text-muted mb-1">Message</label>
       <Field as="textarea" name="Message" type="text" class="form-control" id="ContactAddress" placeholder="留言處" v-model="userInput.userMessage" />
       <ErrorMessage name="Message" />
     </div>
