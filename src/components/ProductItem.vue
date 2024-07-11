@@ -10,8 +10,9 @@ const props = defineProps({
 });
 watch(
   () => props.allCartInfo,
-  (newVal) => {
-    console.log("Updated allCartInfo:", newVal);
+  () => {
+    // return newVal;
+    // console.log("Updated allCartInfo:", newVal);
   },
   { immediate: true }
 );
