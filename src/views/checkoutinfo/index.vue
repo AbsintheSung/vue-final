@@ -24,6 +24,9 @@ const fetchOrderData = async () => {
   });
   // console.log(response.data.orders);
 };
+const getCreateId = (id) => {
+  console.log(id.value);
+};
 onMounted(() => {
   // fetchCartsData();
   fetchOrderData();
@@ -45,7 +48,7 @@ onMounted(() => {
         <PriceInfo :totalPrice="totalPrice" />
       </div>
       <div class="col-md-6">
-        <ProductInfo :allOrderInfo="allOrderInfo" />
+        <ProductInfo :allOrderInfo="allOrderInfo" @sendCreateAtId="getCreateId" />
 
         <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
           <router-link to="/checkout" class="text-dark mt-md-0 mt-3">

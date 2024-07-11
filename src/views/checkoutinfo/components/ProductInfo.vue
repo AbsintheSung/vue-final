@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from "vue";
+/* eslint-disable */
 const props = defineProps({
   allOrderInfo: {
     type: Array,
@@ -7,13 +9,25 @@ const props = defineProps({
     },
   },
 });
-setTimeout(() => {
-  console.log(props.allOrderInfo);
-}, 1000);
+/* eslint-enable */
+const emits = defineEmits({
+  sendCreateAtId: () => {
+    return true;
+  },
+});
+const createAtId = ref("");
+const test = (orderId) => {
+  if (orderId === createAtId.value) {
+    createAtId.value = "";
+  } else {
+    createAtId.value = orderId;
+  }
+  emits("sendCreateAtId", createAtId);
+};
 </script>
 <template>
   <div class="accordion" id="accordionExample">
-    <div class="card rounded-0" v-for="(item, index) in allOrderInfo" :key="item.id">
+    <div class="card rounded-0" v-for="(item, index) in allOrderInfo" :key="item.id" @click="test(item.create_at)">
       <div class="card-header bg-white border-0 py-3 collapsed" :id="`heading${index}`" data-bs-toggle="collapse" :data-bs-target="`#collapse${index}`" aria-expanded="true" :aria-controls="`#collapse${index}`">
         <p class="mb-0 position-relative custom-checkout-label">訂單編號:{{ item.create_at }}</p>
       </div>
