@@ -4,6 +4,11 @@ import { all } from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import zhTW from "@vee-validate/i18n/dist/locale/zh_TW.json";
 import { ref, nextTick } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+const baseURL = import.meta.env.VITE_APP_API_URL;
+const apiName = import.meta.env.VITE_APP_API_NAME;
+const router = useRouter();
 const userInputInit = {
   userEmail: "",
   userName: "",
@@ -36,11 +41,39 @@ Object.entries(all).forEach(([name, rule]) => {
 const handleFormConfirm = async (validate, resetForm) => {
   const response = await validate();
   if (response.valid) {
-    nextTick(() => {
-      userInput.value = { ...userInputInit };
-      resetForm();
-      console.log("跳轉");
-    });
+    await sendFormData(resetForm);
+  }
+};
+const resetAllFormData = (restFn) => {
+  nextTick(() => {
+    userInput.value = { ...userInputInit };
+    restFn();
+    router.push("/checkoutinfo");
+    // console.log("跳轉");
+  });
+};
+
+const sendFormData = async (restFn) => {
+  const orderData = {
+    data: {
+      user: {
+        name: userInput.value.userName,
+        email: userInput.value.userEmail,
+        tel: userInput.value.userphone,
+        address: userInput.value.userAddress,
+      },
+      message: userInput.value.userMessage,
+    },
+  };
+  try {
+    const response = await axios.post(`${baseURL}/v2/api/${apiName}/order`, orderData);
+    if (response.status === 200) {
+      console.log(response);
+      resetAllFormData(restFn);
+      console.log("測試");
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 </script>
