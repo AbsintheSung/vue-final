@@ -2,6 +2,19 @@
 import ProgressLine from "@/components/ProgressLine.vue";
 import CheckHeader from "@/layouts/CheckHeader.vue";
 import ProductItme from "@/components/ProductItem.vue";
+import CheckoutForm from "@/views/checkout/components/CheckoutForm.vue";
+import axios from "axios";
+import { onMounted, ref } from "vue";
+const baseURL = import.meta.env.VITE_APP_API_URL;
+const apiName = import.meta.env.VITE_APP_API_NAME;
+const allCartInfo = ref([]);
+const fetchCartsData = async () => {
+  const response = await axios(`${baseURL}/v2/api/${apiName}/cart`);
+  allCartInfo.value = response.data.data;
+};
+onMounted(() => {
+  fetchCartsData();
+});
 </script>
 <template>
   <div class="container">
@@ -16,74 +29,10 @@ import ProductItme from "@/components/ProductItem.vue";
     </div>
     <div class="row flex-row-reverse justify-content-center pb-5">
       <div class="col-md-4">
-        <ProductItme />
-        <!-- <div class="border p-4 mb-4">
-          <div class="d-flex">
-            <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" alt="" class="me-2" style="width: 48px; height: 48px; object-fit: cover" />
-            <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <p class="mb-0 fw-bold">Lorem ipsum</p>
-                <p class="mb-0">NT$12,000</p>
-              </div>
-              <p class="mb-0 fw-bold">x1</p>
-            </div>
-          </div>
-          <div class="d-flex mt-2">
-            <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" alt="" class="me-2" style="width: 48px; height: 48px; object-fit: cover" />
-            <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <p class="mb-0 fw-bold">Lorem ipsum</p>
-                <p class="mb-0">NT$12,000</p>
-              </div>
-              <p class="mb-0 fw-bold">x1</p>
-            </div>
-          </div>
-          <table class="table mt-4 border-top border-bottom text-muted">
-            <tbody>
-              <tr>
-                <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">Subtotal</th>
-                <td class="text-end border-0 px-0 pt-4">NT$24,000</td>
-              </tr>
-              <tr>
-                <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">Payment</th>
-                <td class="text-end border-0 px-0 pt-0 pb-4">ApplePay</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="d-flex justify-content-between mt-4">
-            <p class="mb-0 h4 fw-bold">Total</p>
-            <p class="mb-0 h4 fw-bold">NT$24,000</p>
-          </div>
-        </div> -->
+        <ProductItme :allCartInfo="allCartInfo" />
       </div>
       <div class="col-md-6">
-        <form>
-          <p>Contact information</p>
-          <div class="mb-0">
-            <label for="ContactMail" class="text-muted mb-0">Email</label>
-            <input type="email" class="form-control" id="ContactMail" aria-describedby="emailHelp" placeholder="example@gmail.com" />
-          </div>
-          <p class="mt-4">Shipping address</p>
-          <div class="mb-2">
-            <label for="ContactName" class="text-muted mb-0">Name</label>
-            <input type="text" class="form-control" id="ContactName" placeholder="Carmen A. Rose" />
-          </div>
-          <div class="mb-2">
-            <label for="ContactPhone" class="text-muted mb-0">Phone</label>
-            <input type="text" class="form-control" id="ContactPhone" placeholder="Password" />
-          </div>
-          <div class="mb-2">
-            <label for="ContactMessage" class="text-muted mb-0">Message</label>
-            <textarea class="form-control" rows="3" id="ContactMessage" placeholder="message ... "></textarea>
-          </div>
-        </form>
-        <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
-          <router-link to="/products" class="text-dark mt-md-0 mt-3">
-            <FontAwesomeIcon class="me-2" :icon="['fas', 'chevron-left']" />
-            Lorem ipsum
-          </router-link>
-          <router-link to="/checkoutinfo" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link>
-        </div>
+        <CheckoutForm />
       </div>
     </div>
   </div>
