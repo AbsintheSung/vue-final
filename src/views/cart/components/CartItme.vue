@@ -8,6 +8,12 @@ const props = defineProps({
       return {};
     },
   },
+  allCartProducts: {
+    type: Array,
+    default: () => {
+      return [];
+    },
+  },
 });
 
 const priceTotal = computed(() => {

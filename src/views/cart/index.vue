@@ -75,7 +75,7 @@ onMounted(() => {
           <CaartCoupon />
         </div>
         <div class="col-md-4">
-          <CartItem :priceInfo="priceInfo" />
+          <CartItem :priceInfo="priceInfo" :allCartProducts="allCartProducts" />
         </div>
       </div>
       <div class="my-5">
