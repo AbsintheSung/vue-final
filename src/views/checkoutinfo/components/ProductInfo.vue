@@ -9,6 +9,9 @@ const props = defineProps({
     },
   },
 });
+setTimeout(() => {
+  console.log(props.allOrderInfo);
+}, 1000);
 /* eslint-enable */
 const emits = defineEmits({
   sendCreateAtId: () => {

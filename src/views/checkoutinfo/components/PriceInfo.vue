@@ -3,10 +3,19 @@ import { computed } from "vue";
 
 const props = defineProps({
   totalPrice: {
-    type: Number,
+    type: Array,
+    default: () => {
+      return [];
+    },
   },
 });
-const totalPrice = computed(() => props.totalPrice);
+const totalPrice = computed(() => {
+  if (props.totalPrice.length === 0) {
+    return 0;
+  } else {
+    return props.totalPrice[0].total;
+  }
+});
 </script>
 <template>
   <div class="border p-4 mb-4">
