@@ -11,7 +11,8 @@ const apiName = import.meta.env.VITE_APP_API_NAME;
 // const allCartInfo = ref([]);
 const allOrderInfo = ref([]);
 const totalPrice = ref(0);
-const createId = ref("");
+const orderId = ref("");
+const isPaid = ref("");
 // const fetchCartsData = async () => {
 //   const response = await axios(`${baseURL}/v2/api/${apiName}/cart`);
 //   allCartInfo.value = response.data.data;
@@ -19,7 +20,7 @@ const createId = ref("");
 const fetchOrderData = async () => {
   const response = await axios(`${baseURL}/v2/api/${apiName}/orders`);
   allOrderInfo.value = response.data.orders;
-  console.log(response.data.orders);
+  console.log(response.data);
   response.data.orders.forEach((item) => {
     totalPrice.value = totalPrice.value + item.total;
   });
@@ -27,28 +28,36 @@ const fetchOrderData = async () => {
 };
 const oneOrder = computed(() => {
   return allOrderInfo.value.filter((item) => {
-    return item.create_at === createId.value;
+    return item.id === orderId.value;
   });
 });
-const getCreateId = async (id) => {
-  if (id.value === "") {
-    createId.value = "";
+const getOrderId = async (oneOrderData) => {
+  console.log(oneOrderData);
+  if (oneOrderData.orderOneId === "") {
+    orderId.value = "";
+    isPaid.value = "";
     return;
   }
-  createId.value = id.value;
+  orderId.value = oneOrderData.orderOneId;
+  isPaid.value = oneOrderData.isPaid;
   try {
-    await axios(`${baseURL}/v2/api/${apiName}/order/${createId.value}`);
+    await axios(`${baseURL}/v2/api/${apiName}/order/${orderId.value}`);
   } catch (error) {
     console.log(error);
   }
 };
 const handleOrder = async () => {
-  if (createId.value !== "") {
-    const response = await axios.post(`${baseURL}/v2/api/${apiName}/pay/${createId.value}`);
+  if (orderId.value !== "" && !isPaid.value) {
+    const response = await axios.post(`${baseURL}/v2/api/${apiName}/pay/${orderId.value}`);
     console.log(response);
+    if (response.status === 200) {
+      await fetchOrderData();
+    }
     // console.log("發送結帳api");
+  } else if (isPaid.value) {
+    console.log("該訂單已結清");
   } else {
-    console.log("請選擇要結帳的訂單");
+    console.log("選擇訂單");
   }
   // console.log(createId.value);
 };
@@ -73,7 +82,7 @@ onMounted(() => {
         <PriceInfo :totalPrice="oneOrder" />
       </div>
       <div class="col-md-6">
-        <ProductInfo :allOrderInfo="allOrderInfo" @sendCreateAtId="getCreateId" />
+        <ProductInfo :allOrderInfo="allOrderInfo" @sendCreateAtId="getOrderId" />
 
         <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
           <!-- <router-link to="/checkout" class="text-dark mt-md-0 mt-3">
