@@ -1,26 +1,77 @@
 <script setup>
 import ProgressLine from "@/components/ProgressLine.vue";
 import CheckHeader from "@/layouts/CheckHeader.vue";
-import ProductItem from "@/components/ProductItem.vue";
+// import ProductItem from "@/components/ProductItem.vue";
 import ProductInfo from "@/views/checkoutinfo/components/ProductInfo.vue";
+import PriceInfo from "@/views/checkoutinfo/components/PriceInfo.vue";
+import axios from "axios";
+import { computed, onMounted, ref } from "vue";
+const baseURL = import.meta.env.VITE_APP_API_URL;
+const apiName = import.meta.env.VITE_APP_API_NAME;
+// const allCartInfo = ref([]);
+const allOrderInfo = ref([]);
+const totalPrice = ref(0);
+const orderId = ref("");
+const isPaid = ref("");
+// const fetchCartsData = async () => {
+//   const response = await axios(`${baseURL}/v2/api/${apiName}/cart`);
+//   allCartInfo.value = response.data.data;
+// };
+const fetchOrderData = async () => {
+  const response = await axios(`${baseURL}/v2/api/${apiName}/orders`);
+  allOrderInfo.value = response.data.orders;
+  console.log(response.data);
+  response.data.orders.forEach((item) => {
+    totalPrice.value = totalPrice.value + item.total;
+  });
+  // console.log(response.data.orders);
+};
+const oneOrder = computed(() => {
+  return allOrderInfo.value.filter((item) => {
+    return item.id === orderId.value;
+  });
+});
+const getOrderId = async (oneOrderData) => {
+  console.log(oneOrderData);
+  if (oneOrderData.orderOneId === "") {
+    orderId.value = "";
+    isPaid.value = "";
+    return;
+  }
+  orderId.value = oneOrderData.orderOneId;
+  isPaid.value = oneOrderData.isPaid;
+  try {
+    await axios(`${baseURL}/v2/api/${apiName}/order/${orderId.value}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+const handleOrder = async () => {
+  if (orderId.value !== "" && !isPaid.value) {
+    const response = await axios.post(`${baseURL}/v2/api/${apiName}/pay/${orderId.value}`);
+    console.log(response);
+    if (response.status === 200) {
+      await fetchOrderData();
+    }
+    // console.log("發送結帳api");
+  } else if (isPaid.value) {
+    console.log("該訂單已結清");
+  } else {
+    console.log("選擇訂單");
+  }
+  // console.log(createId.value);
+};
+onMounted(() => {
+  // fetchCartsData();
+  fetchOrderData();
+});
 </script>
 <template>
   <div class="container">
     <CheckHeader>
       <ProgressLine />
     </CheckHeader>
-    <!-- <div class="row justify-content-center">
-      <div class="col-md-10">
-        <nav class="navbar navbar-expand-lg navbar-light px-0">
-          <a class="navbar-brand" href="./index.html">Navbar</a>
-          <ul class="list-unstyled mb-0 ms-md-auto d-flex align-items-center justify-content-between justify-content-md-end w-100 mt-md-0 mt-4">
-            <li class="me-md-6 me-3 position-relative custom-step-line"><i class="fas fa-check-circle d-md-inline d-block text-center"></i> <span class="text-nowrap">Lorem ipsum</span></li>
-            <li class="me-md-6 me-3 position-relative custom-step-line"><i class="fas fa-check-circle d-md-inline d-block text-center"></i> <span class="text-nowrap">Lorem ipsum</span></li>
-            <li><i class="fas fa-dot-circle d-md-inline d-block text-center"></i> <span class="text-nowrap">Lorem ipsum</span></li>
-          </ul>
-        </nav>
-      </div>
-    </div> -->
+
     <div class="row justify-content-center">
       <div class="col-md-10">
         <h3 class="fw-bold mb-4 pt-3">Lorem ipsum</h3>
@@ -28,107 +79,18 @@ import ProductInfo from "@/views/checkoutinfo/components/ProductInfo.vue";
     </div>
     <div class="row flex-row-reverse justify-content-center pb-5">
       <div class="col-md-4">
-        <ProductItem />
-        <!-- <div class="border p-4 mb-4">
-          <div class="d-flex">
-            <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" alt="" class="me-2" style="width: 48px; height: 48px; object-fit: cover" />
-            <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <p class="mb-0 fw-bold">Lorem ipsum</p>
-                <p class="mb-0">NT$12,000</p>
-              </div>
-              <p class="mb-0 fw-bold">x1</p>
-            </div>
-          </div>
-          <div class="d-flex mt-2">
-            <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" alt="" class="me-2" style="width: 48px; height: 48px; object-fit: cover" />
-            <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <p class="mb-0 fw-bold">Lorem ipsum</p>
-                <p class="mb-0">NT$12,000</p>
-              </div>
-              <p class="mb-0 fw-bold">x1</p>
-            </div>
-          </div>
-          <table class="table mt-4 border-top border-bottom text-muted">
-            <tbody>
-              <tr>
-                <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">Subtotal</th>
-                <td class="text-end border-0 px-0 pt-4">NT$24,000</td>
-              </tr>
-              <tr>
-                <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">Payment</th>
-                <td class="text-end border-0 px-0 pt-0 pb-4">ApplePay</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="d-flex justify-content-between mt-4">
-            <p class="mb-0 h4 fw-bold">Total</p>
-            <p class="mb-0 h4 fw-bold">NT$24,000</p>
-          </div>
-        </div> -->
+        <PriceInfo :totalPrice="oneOrder" />
       </div>
       <div class="col-md-6">
-        <ProductInfo />
-        <!-- <div class="accordion" id="accordionExample">
-          <div class="card rounded-0">
-            <div class="card-header bg-white border-0 py-3" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <p class="mb-0 position-relative custom-checkout-label">Lorem ipsum</p>
-            </div>
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="card-body bg-light ps-5 py-4">
-                <div class="mb-2">
-                  <label for="Lorem ipsum1" class="text-muted mb-0">Lorem ipsum</label>
-                  <input type="text" class="form-control" id="Lorem ipsum1" placeholder="Lorem ipsum" />
-                </div>
-                <div class="mb-0">
-                  <label for="Lorem ipsum2" class="text-muted mb-0">Lorem ipsum</label>
-                  <input type="text" class="form-control" id="Lorem ipsum2" placeholder="Lorem ipsum" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card rounded-0">
-            <div class="card-header bg-white border-0 py-3 collapsed" id="headingTwo" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-              <p class="mb-0 position-relative custom-checkout-label">Lorem ipsum</p>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-              <div class="card-body bg-light ps-5 py-4">
-                <div class="mb-2">
-                  <label for="Lorem ipsum1" class="text-muted mb-0">Lorem ipsum</label>
-                  <input type="text" class="form-control" id="Lorem ipsum1" placeholder="Lorem ipsum" />
-                </div>
-                <div class="mb-0">
-                  <label for="Lorem ipsum2" class="text-muted mb-0">Lorem ipsum</label>
-                  <input type="text" class="form-control" id="Lorem ipsum2" placeholder="Lorem ipsum" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card rounded-0">
-            <div class="card-header bg-white border-0 py-3 collapsed" id="headingThree" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-              <p class="mb-0 position-relative custom-checkout-label">Lorem ipsum</p>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-              <div class="card-body bg-light ps-5 py-4">
-                <div class="mb-2">
-                  <label for="Lorem ipsum1" class="text-muted mb-0">Lorem ipsum</label>
-                  <input type="text" class="form-control" id="Lorem ipsum1" placeholder="Lorem ipsum" />
-                </div>
-                <div class="mb-0">
-                  <label for="Lorem ipsum2" class="text-muted mb-0">Lorem ipsum</label>
-                  <input type="text" class="form-control" id="Lorem ipsum2" placeholder="Lorem ipsum" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        <ProductInfo :allOrderInfo="allOrderInfo" @sendCreateAtId="getOrderId" />
+
         <div class="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
-          <router-link to="/checkout" class="text-dark mt-md-0 mt-3">
+          <!-- <router-link to="/checkout" class="text-dark mt-md-0 mt-3">
             <i class="fas fa-chevron-left me-2"></i>
             Lorem ipsum
-          </router-link>
-          <router-link to="/success" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link>
+          </router-link> -->
+          <!-- <router-link to="/success" class="btn btn-dark py-3 px-7">Lorem ipsum</router-link> -->
+          <button class="btn btn-dark py-3 px-7 ms-auto" @click="handleOrder">確認結帳</button>
         </div>
       </div>
     </div>

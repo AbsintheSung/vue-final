@@ -40,6 +40,7 @@ Object.entries(all).forEach(([name, rule]) => {
 });
 const handleFormConfirm = async (validate, resetForm) => {
   const response = await validate();
+  console.log(response);
   if (response.valid) {
     await sendFormData(resetForm);
   }
@@ -78,27 +79,27 @@ const sendFormData = async (restFn) => {
 };
 </script>
 <template>
-  <Form :validation-schema="schema" v-slot="{ validate, resetForm }">
+  <Form :validation-schema="schema" v-slot="{ validate, resetForm, errors }">
     <p>Contact information</p>
     <div class="mb-3">
       <label for="ContactMail" class="text-muted mb-1">Email</label>
-      <Field name="email" type="email" class="form-control" id="ContactMail" aria-describedby="emailHelp" placeholder="example@gmail.com" v-model="userInput.userEmail" />
-      <ErrorMessage name="email" />
+      <Field name="email" type="email" class="form-control" :class="{ 'is-invalid': errors.email, 'is-valid': !errors.email && userInput.userEmail }" id="ContactMail" aria-describedby="emailHelp" placeholder="example@gmail.com" v-model="userInput.userEmail" />
+      <ErrorMessage name="email" class="invalid-feedback" />
     </div>
     <div class="mb-3">
       <label for="ContactName" class="text-muted mb-1">Name</label>
-      <Field name="userName" type="text" class="form-control" id="ContactName" placeholder="Carmen A. Rose" v-model="userInput.userName" />
-      <ErrorMessage name="userName" />
+      <Field name="userName" type="text" class="form-control" :class="{ 'is-invalid': errors.userName, 'is-valid': !errors.userName && userInput.userName }" id="ContactName" placeholder="Carmen A. Rose" v-model="userInput.userName" />
+      <ErrorMessage name="userName" class="invalid-feedback" />
     </div>
     <div class="mb-3">
       <label for="ContactPhone" class="text-muted mb-1">Phone</label>
-      <Field name="phone" type="text" class="form-control" id="ContactPhone" placeholder="0911123123" v-model="userInput.userphone" />
-      <ErrorMessage name="phone" />
+      <Field name="phone" type="text" class="form-control" :class="{ 'is-invalid': errors.phone, 'is-valid': !errors.phone && userInput.userphone }" id="ContactPhone" placeholder="0911123123" v-model="userInput.userphone" />
+      <ErrorMessage name="phone" class="invalid-feedback" />
     </div>
     <div class="mb-3">
       <label for="ContactAddress" class="text-muted mb-1">Address</label>
-      <Field name="address" type="text" class="form-control" id="ContactAddress" placeholder="高雄市三民區" v-model="userInput.userAddress" />
-      <ErrorMessage name="address" />
+      <Field name="address" type="text" class="form-control" :class="{ 'is-invalid': errors.address, 'is-valid': !errors.address && userInput.userAddress }" id="ContactAddress" placeholder="高雄市三民區" v-model="userInput.userAddress" />
+      <ErrorMessage name="address" class="invalid-feedback" />
     </div>
     <div class="mb-3">
       <label for="Message" class="text-muted mb-1">Message</label>
